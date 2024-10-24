@@ -1,0 +1,226 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  max-height: 100%;
+  background-color: #fefefe;
+  background-image: none;
+}
+
+.card-header {
+  background-image: url('/images/backgroundLogin.png');
+  background-position: center left;
+  color: white;
+}
+
+.list-group-item {
+  display: flex;
+  align-items: center;
+}
+
+.list-group-item img {
+  margin-right: 10px;
+}
+
+.list-group-item div {
+  display: inline-block;
+}
+
+.card-body {
+  height: 200px;
+  position: relative; /* Add this line to allow absolute positioning inside */
+}
+
+.container-homepage {
+  padding: 0% !important;
+  margin-block-start: 7%;
+  height: 80%;
+  width: 90%;
+  border-radius: 25px;
+}
+
+.row {
+  justify-content: space-between;
+}
+
+.card-message-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+
+.happiness-meter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.happiness-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15vh;
+  gap: 2.5rem;
+}
+
+.card-info-homepage {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.card-info-mood {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.h2-message {
+  margin-top: 0;
+}
+
+.col-right {
+  height: 42.5vh;
+}
+
+.card-mid {
+  margin-top: 2.5vh;
+}
+
+.card {
+  --bs-card-border-color: #4D10A2 !important;
+  box-shadow: 0px 2px 6px 0px #00000038;
+}
+
+.mood i {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.mood > i:hover {
+  transform: scale(1.2);
+}
+
+.add-msg {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 30px;
+  transition: transform 0.3s ease;
+  color: #4D10A2;
+}
+
+.add-msg:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.add-msg-section {
+  z-index: 1000; /* Certifique-se de que o z-index é alto o suficiente */
+  position: fixed; /* Faz com que a seção cubra toda a tela */
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  max-height: 100%;
+  background-color: #25252570;
+}
+
+.title-add-msg {
+  color: #fefefe;
+  text-align: center;
+}
+
+.button-add-msg {
+  color: white;
+  transition: transform 0.3s ease;
+
+}
+
+.button-add-msg:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+
+}
+
+.area-new-msg {
+  display: flex;
+  flex-direction: column;
+}
+
+.icons-add-msg {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10%;
+}
+
+.textarea-add-msg {
+  display: block;
+  width: 50vw;
+  height: 50vh;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  padding: 5px;
+  margin: 1.8rem 0;
+  font-size: 1rem;
+  resize: none;
+
+}
+
+
+.textarea-add-msg:focus {
+  border-bottom: 2px solid #4D10A2;
+  outline: none;
+  box-shadow: none;
+  font-size: 1rem;
+}
+
+.div-imagem {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.div-totalmente-teste {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.image-mood {
+  margin: 0 !important;
+}
+
+.mood-list {
+  list-style-type: none;
+  margin: 1vh 0;
+}
+
+.card-body-mood {
+  padding: 2% !important;
+}
+
+.game-info-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.game-info-title {
+  display: flex;
+  flex-direction: column;
+}

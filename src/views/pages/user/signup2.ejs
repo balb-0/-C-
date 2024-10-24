@@ -1,0 +1,25 @@
+<!-- Container for the sign-up section with background fade effect --> <div class="div-sign bg-fade">
+  <!-- Title of the sign-up page -->
+  <h1 class="titulo-signup">Code Connecting Cultures</h1>
+  <div class="sign-container">
+    <!-- Subtitle for the sign-up card with top margin -->
+    <h2 class="mt-5 titulo-card-signup">Sign Up</h2>
+    <!-- Form for updating user profile, with POST method to '/updateUser' -->
+    <form id="updateProfileForm" action="/updateUser" method="POST">
+      <!-- Text area for 'About Me' section -->
+      <div class="mb-3">
+        <label for="aboutMe" class="form-label login-info form-texto">About Me</label>
+        <textarea class="form-control-sign form-control-sign2" id="aboutMe" name="aboutMe" required maxlength="750" placeholder="Hello! I'm someone who thrives on creativity and curiosity, always eager to learn and explore new horizons. With a passion for art and technology, I enjoy blending these fields to create innovative projects. In my free time, I love hiking, reading, and experimenting with new recipes. I value meaningful connections and enjoy engaging in deep, thought-provoking conversations with people from all walks of life."></textarea>
+      </div>
+      <!-- Text area for 'About My Country' section -->
+      <div class="mb-3">
+        <label for="countryPov" class="form-label login-info form-texto">About My Country</label>
+        <textarea class="form-control-sign" id="countryPov" name="countryPov" required maxlength="750" placeholder="My country, with its diverse landscapes ranging from lush forests to sprawling deserts, is a place of rich cultural heritage and vibrant traditions. Known for its delicious cuisine, friendly people, and historic landmarks, it offers a unique blend of ancient history and modern innovation. Whether exploring bustling cities or tranquil countryside, there's always something new to discover here."></textarea>
+      </div>
+      <!-- Submit button to update profile -->
+      <div class="sign-btn">
+        <button type="submit" class="btn-dark btn-sign">Update</button>
+      </div>
+    </form>
+  </div>
+</div>

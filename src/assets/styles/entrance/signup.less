@@ -1,0 +1,166 @@
+/* Apply box-sizing: border-box to all elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Styling for the body of the signup page */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  max-height: 100%;
+  background-image: url('../../images/backgroundLogin.png');
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+/* Additional class for background fade effect */
+.bg-fade {
+  background-image: url('../../images/backgroundLogin.png');
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+/* Styling for the main title of the signup page */
+.titulo-signup {
+  color: #fefefe;
+  font-size: 9rem;
+  font-weight: bold;
+  max-width: 60%;
+  margin-left: 2.5vw;
+}
+
+/* Container for the signup section */
+.div-sign {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Container for the signup form */
+.sign-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 20px;
+  width: 30vw;
+  margin-right: 5vw;
+}
+
+/* Styling for the card title in the signup section */
+.titulo-card-signup {
+  position: relative;
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 15%;
+}
+
+/* Styling for labels in the signup form */
+.login-info {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Styling for input fields in the signup form */
+.form-control-sign {
+  display: block;
+  width: 30vw;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  transition: border-color 0.3s;
+  padding: 5px;
+  margin-bottom: 1.8rem;
+  font-size: 1rem;
+}
+
+/* Styling for input fields when focused */
+.form-control-sign:focus {
+  border-bottom: 2px solid #4D10A2;
+  outline: none;
+  box-shadow: none;
+  font-size: 1rem;
+}
+
+/* Additional margin-bottom for certain input fields */
+.form-control-sign2 {
+  margin-bottom: 5vh;
+}
+
+/* Styling for the dark button */
+.btn-dark {
+  background-color: #4D10A2;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 1rem 1.5rem;
+  margin-top: 10%;
+  transition: .3s;
+}
+
+/* Styling for the dark button on hover */
+.btn-dark:hover {
+  background-color: #8A2BE2;
+  transition: .3s;
+}
+
+/* Styling for the signup button container */
+.sign-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* Styling for text links to credentials */
+.text-credentials {
+  color: #4D10A2 !important;
+  text-decoration: none;
+  font-size: .7rem;
+}
+
+/* Styling for text links to credentials on hover */
+.text-credentials:hover {
+  text-decoration: underline;
+}
+
+/* Minimum height for textareas */
+textarea {
+  min-height: 20vh;
+}
+
+
+.div-flex-horizontal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.itens-flex-horizontal {
+  max-width: 50%;
+}
+
+.form-control-flex {
+  max-width: 50%;
+}
+
+.flex-item-filho {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.itens-flex-horizontal > label {
+  font-size: 1.4rem;
+}

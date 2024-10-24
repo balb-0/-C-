@@ -1,0 +1,184 @@
+<!-- Header section containing navigation -->
+<header class="head">
+  <nav class="navega">
+    <a href="/"><img src="images/logo.svg" class="image-nav logo-site"></a>
+    <ul class="lista">
+      <li class="item"><a href="/group" class="item-nav-perfil">TEAM</a></li>
+      <li class="item"><a href="/questions/external-type" class="item-nav-perfil">ASSESSMENT</a></li>
+      <li class="item"><a href="/feedback" class="item-nav-perfil">FEEDBACKS</a></li>
+    </ul>
+    <!-- SVG for a toggle icon used to open sidebar -->
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="50" viewBox="0,0,300,300"
+      class="image-nav" aria-controls="sidebar" aria-expanded="false" id="toggle">
+      <g fill="#fefefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+        stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+        font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <g transform="scale(5.12,5.12)">
+          <path d="M0,9v2h50v-2zM0,24v2h50v-2zM0,39v2h50v-2z"></path>
+        </g>
+      </g>
+    </svg>
+  </nav>
+</header>
+
+<div class="container">
+  <h2 class="mt-5">Admin Dashboard</h2>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <a href="/game/create" class="btn btn-primary btn-block mb-3">Create New Game</a>
+    </div>
+  </div>
+
+  <h3 class="mt-5">List of Games</h3>
+  <div class="row">
+    <% games.forEach(function(game) { %>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Game ID: <%= game.id %>
+            </h5>
+            <p class="card-text">Start Date: <%= new Date(game.startDate).toLocaleDateString() %>
+            </p>
+            <p class="card-text">End Date: <%= new Date(game.endDate).toLocaleDateString() %>
+            </p>
+            <a href="/game" class="btn btn-info">View</a>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+  </div>
+</div>
+<!-- Sidebar for profile navigation -->
+<section class="sidebar-profile" id="sidebar" data-visible="false">
+  <!-- SVG for a close icon used to close sidebar -->
+  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
+    class="image-nav toggle-close" aria-controls="sidebar" aria-expanded="true" id="close">
+    <g fill="#fefefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+      stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+      font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+      <g transform="scale(5.12,5.12)">
+        <path
+          d="M7.71875,6.28125l-1.4375,1.4375l17.28125,17.28125l-17.28125,17.28125l1.4375,1.4375l17.28125,-17.28125l17.28125,17.28125l1.4375,-1.4375l-17.28125,-17.28125l17.28125,-17.28125l-1.4375,-1.4375l-17.28125,17.28125z">
+        </path>
+      </g>
+    </g>
+  </svg>
+  <div class="sidebar-profile-info sidebar-profile-info-right">
+    <img src="<%= user.photo || '/images/default-profile.png'%>" class="profile-picture" alt="<%= user.fullName %>"
+      width="40" height="40">
+    <div class="sidebar-user-info">
+      <strong class="profile-name">
+        <%=user.fullName%>
+      </strong>
+      <strong class="profile-name">
+        <%=user.userType[0].toUpperCase() + user.userType.slice(1)%>
+      </strong>
+    </div>
+  </div>
+  <div class="container-sidebar-items">
+    <!-- Sidebar navigation items -->
+    <div class="sidebar-section sidebar-section2">
+      <div class="item-sidebar profile">
+        <img src="images/profile.svg" alt="" class="icon-sidebar">
+        <p class="text-sidebar"><a href="/me" class="link-sidebar">My profile</a></p>
+      </div>
+      <div class="item-sidebar home">
+        <img src="images/home.svg" alt="" class="icon-sidebar">
+        <p class="text-sidebar"><a href="#" class="link-sidebar">Home</a></p>
+      </div>
+      <% if (user.userType==='admin' ) { %>
+        <div class="item-sidebar admin">
+          <img src="images/admin-white.png" alt="" class="icon-sidebar">
+          <p class="text-sidebar">
+            <a href="/admin" class="link-sidebar">Admin</a>
+          </p>
+        </div>
+        <% } %>
+          <% if (user.userType==='admin' || user.userType==='tutor' ) { %>
+            <div class="item-sidebar tutor">
+              <img src="images/criarGrupo-white.png" alt="" class="icon-sidebar">
+              <p class="text-sidebar">
+                <a href="/game" class="link-sidebar">Create Group</a>
+              </p>
+            </div>
+            <% } %>
+    </div>
+  </div>
+  <div class="sidebar-section sidebar-section-logout">
+    <!-- Sidebar help and logout items -->
+    <div class="sidebar-section sidebar-section3">
+      <div class="item-sidebar help">
+        <img src="images/help.svg" alt="" class="icon-sidebar">
+        <p class="text-sidebar"><a href="#" class="link-sidebar">Help</a></p>
+      </div>
+    </div>
+    <div class="item-sidebar logout">
+      <img src="images/logout.svg" alt="" class="icon-sidebar">
+      <p class="text-sidebar text-logout"><a href="/logout" class="link-sidebar link-sidebar-logout">Logout</a></p>
+    </div>
+  </div>
+</section>
+<!-- Custom Styles -->
+<style>
+  .card {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+</style>
+
+<!-- Script to handle sidebar toggle functionality -->
+<script>
+  // Get references to the sidebar, toggle button, and close button elements
+  const sidebar = document.querySelector("#sidebar");
+  const toggle = document.querySelector("#toggle");
+  const close = document.querySelector("#close");
+
+  // Add a click event listener to the toggle button
+  toggle.addEventListener('click', () => {
+    // Check if the sidebar is currently visible
+    const isVisible = sidebar.getAttribute('data-visible') === 'true';
+
+    if (isVisible) {
+      // If the sidebar is visible, hide it
+      sidebar.setAttribute('data-visible', 'false');
+      toggle.setAttribute('aria-expanded', 'false');
+      sidebar.style.zIndex = '1';
+    } else {
+      // If the sidebar is hidden, show it
+      sidebar.setAttribute('data-visible', 'true');
+      toggle.setAttribute('aria-expanded', 'true');
+      sidebar.style.zIndex = '100';
+    }
+  });
+
+  // Add a click event listener to the close button
+  close.addEventListener('click', () => {
+    // Hide the sidebar when the close button is clicked
+    sidebar.setAttribute('data-visible', 'false');
+    toggle.setAttribute('aria-expanded', 'false');
+    sidebar.style.zIndex = '1';
+  });
+
+
+  // Add a click event listener to the entire document
+  document.addEventListener('click', (event) => {
+    // Check if the click occurred inside the sidebar
+    const isClickInsideSidebar = sidebar.contains(event.target);
+    // Check if the click occurred on the toggle button or close button
+    const isClickOnToggle = toggle.contains(event.target) || close.contains(event.target);
+
+    // If the click was outside the sidebar and not on the toggle or close button
+    if (!isClickInsideSidebar && !isClickOnToggle) {
+      // Hide the sidebar
+      sidebar.setAttribute('data-visible', 'false');
+      toggle.setAttribute('aria-expanded', 'false');
+      sidebar.style.zIndex = '1';
+    }
+  });
+
+</script>

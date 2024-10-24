@@ -1,0 +1,168 @@
+* {
+  box-sizing: border-box;
+}
+
+.body-feedback {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  max-height: 100%;
+  background-image: url('../../images/backgroundLogin.png') !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.form-controlGroup {
+  width: 100% !important;
+  background-color: #d9d9d9;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  transition: border-color 0.3s;
+}
+
+.mt-5 {
+  margin-bottom: 3rem;
+  margin-top: 1rem;
+}
+
+/* Styling for form controls when focused */
+.form-controlGroup:focus {
+  border-bottom: 2px solid #4D10A2;
+  outline: none;
+  box-shadow: none;
+}
+
+.container-create-group {
+  margin-block-start: 7%;
+  height: 80%;
+  width: 90%;
+  background-color: #d9d9d9;
+  border-radius: 25px;
+}
+
+.create-feedback-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.top-title {
+  position: relative;
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 0;
+  margin-top: 1em;
+}
+
+.feedback-create-form {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  width: 40em;
+  margin-left: 5em;
+  margin-right: 5em;
+}
+
+.form-labelGroup {
+  width: 100% !important;
+  background-color: #d9d9d9;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  transition: border-color 0.3s;
+}
+
+.feedback-info {
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+.form-select-feedback {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  background-color: white;
+  border-radius: 0;
+  transition: border-color 0.3s;
+}
+
+.form-select-feedback:focus {
+  border: 2px solid #4D10A2;
+  outline: none;
+  box-shadow: none;
+}
+
+.send-btn-feedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createGroupButton {
+  background-color: #4D10A2;
+  color: white;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 1rem 1.5rem;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  transition: .3s;
+}
+
+/* Styling for dark button on hover */
+.createGroupButton:hover {
+  background-color: #8A2BE2;
+  transition: .3s;
+}
+
+#suggestions {
+  border: 1px solid #ccc;
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  background-color: #fff;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#suggestions li {
+  cursor: pointer;
+}
+
+#suggestions li:hover {
+  background-color: #f0f0f0;
+}
+
+.selected-user {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #e9ecef;
+  border-radius: 5px;
+  position: relative;
+}
+
+.selected-user .remove-user {
+  margin-left: 5px;
+  cursor: pointer;
+  color: red;
+}

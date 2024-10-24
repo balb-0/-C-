@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send Assessment</title>
+</head>
+
+<body class="assessment-body">
+  <!-- Header section containing navigation -->
+  <header class="head">
+    <nav class="navega">
+      <a href="/"><img src="/images/logo.svg" class="image-nav logo-site"></a>
+      <ul class="lista">
+        <li class="item"><a href="#" class="item-nav-perfil">TEAM</a></li>
+        <li class="item"><a href="#" class="item-nav-perfil">ASSESSMENT</a></li>
+        <li class="item"><a href="#" class="item-nav-perfil">FEEDBACKS</a></li>
+      </ul>
+      <!-- SVG for a toggle icon used to open sidebar -->
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="50" viewBox="0,0,300,300"
+        class="image-nav" aria-controls="sidebar" aria-expanded="false" id="toggle">
+        <g fill="#fefefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+          stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+          font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+          <g transform="scale(5.12,5.12)">
+            <path d="M0,9v2h50v-2zM0,24v2h50v-2zM0,39v2h50v-2z"></path>
+          </g>
+        </g>
+      </svg>
+    </nav>
+  </header>
+  <section class="profile-indeed">
+    <div class="profile-section-center">
+      <div class="sidebar-profile-info profile-indeed-card">
+        <div class="profile-picture-container">
+          <img src="<%= user.photo || '/images/default-profile.png'%>" class="profile-indeed-picture"
+            alt="<%= user.fullName %>" width="40" height="40">
+          <div class="edit-icon-container">
+            <a href="/me/edit">
+              <img src="images/edit.svg" alt="" class="edit-icon">
+            </a>
+          </div>
+        </div>
+        <div class="sidebar-user-info sidebar-profile-info-left profile-indeed-info">
+          <strong class="profile-name profile-info-indeed">
+            <%=user.fullName%>
+          </strong>
+          <strong class="profile-name profile-info-indeed">
+            <%=user.userType%>
+          </strong>
+          <strong class="profile-name profile-info-indeed">
+            <%=user.personalProfileType%>
+          </strong>
+          <strong class="profile-name profile-info-indeed">
+            <%= user.countryId.name %>
+          </strong>
+          <strong class="profile-name profile-info-indeed">
+            <%= user.birthday %>
+          </strong>
+          <strong class="profile-name profile-info-indeed">
+            <%= timeUser %>
+          </strong>
+        </div>
+      </div>
+      <div class="profile-text-box">
+        <h3>About Me</h3>
+        <div class="profile-indeed-about">
+          <p>
+            <%=user.aboutMe%>
+          </p>
+        </div>
+        <h3>About My Country</h3>
+        <div class="profile-indeed-about">
+          <p>
+            <%=user.countryPov%>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="assessment-container">
+    <h2 class="top-title">Send Assessment</h2>
+    <form action="/assessment" method="POST" class="create-assessment-form">
+      <div class="mb3">
+        <label for="toUserId" class="form-label assessment-info">Recipient</label>
+        <select name="toUserId" id="toUserId" class="form-select-assessment" required>
+          <% groupMembers.forEach(function(member) { %>
+            <option value="<%= member.id %>">
+              <%= member.fullName %> (<%= member.emailAddress %>)
+            </option>
+            <% }); %>
+        </select>
+      </div>
+      <div class="mb3">
+        <label for="roundId" class="form-label assessment-info">Round ID</label>
+        <input type="text" name="roundId" id="roundId" class="form-control">
+      </div>
+      <div class="div-questions-assessment">
+        <div class="question-container-assessment">
+          <div class="test-header-assessment">
+            <h3>Self Evaluation</h3>
+          </div>
+          <div class="test-explanation-assessment">
+            <h5>
+              The self-evaluation form focuses on assessing decision-making tendencies through seven questions. Each
+              question presents a scenario with two alternative choices, and respondents select the option that aligns
+              most closely with their approach to decision-making. The form aims to provide insights into individuals'
+              preferences regarding clarity of tasks, adaptability to change, planning methods, reliance on data versus
+              intuition, and ethical considerations in decision-making. Responses categorize individuals into distinct
+              decision-making styles, emphasizing analytical thinking and consideration of various factors in
+              decision-making processes.
+            </h5>
+          </div>
+          <% questions.forEach(function(question, index) { %>
+            <% if (question.questionType.includes("binary_choice")) { %>
+              <div class="question-model-assessment">
+                <div class="question-header-assessment">
+                  <h5>
+                    <%= question.questionText %>
+                  </h5>
+                </div>
+                <div class="answers-assessment">
+                  <div class="answer-item-assessment">
+                    <input type="radio" id="radio1-<%= index %>" name="rating-<%= index %>" value="1" alt="option 1" />
+                    <label for="radio1-<%= index %>"></label>
+                    <p>
+                      <%= question.alternatives[0] %>
+                    </p>
+                  </div>
+                  <div class="answer-item-assessment">
+                    <input type="radio" id="radio2-<%= index %>" name="rating-<%= index %>" value="2" alt="option 2" />
+                    <label for="radio2-<%= index %>"></label>
+                    <p>
+                      <%= question.alternatives[1] %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <% } else if (question.questionType.includes("radio_choice")) { %>
+                <div class="question-model-assessment">
+                  <div class="question-header-assessment">
+                    <h5>
+                      <%= question.questionText %>
+                    </h5>
+                  </div>
+                  <div class="answers-assessment">
+                    <h5>Disagree</h5>
+                    <input type="radio" id="radio1-<%= index %>" name="rating-<%= index %>" value="1" alt="disagree" />
+                    <label for="radio1-<%= index %>"></label>
+                    <input type="radio" id="radio2-<%= index %>" name="rating-<%= index %>" value="2"
+                      alt="partially disagree" />
+                    <label for="radio2-<%= index %>"></label>
+                    <input type="radio" id="radio3-<%= index %>" name="rating-<%= index %>" value="3" alt="neutral" />
+                    <label for="radio3-<%= index %>"></label>
+                    <input type="radio" id="radio4-<%= index %>" name="rating-<%= index %>" value="4"
+                      alt="partially agree" />
+                    <label for="radio4-<%= index %>"></label>
+                    <input type="radio" id="radio5-<%= index %>" name="rating-<%= index %>" value="5" alt="agree" />
+                    <label for="radio5-<%= index %>"></label>
+                    <h5>Agree</h5>
+                  </div>
+                </div>
+                <% } %>
+                  <% }); %>
+        </div>
+      </div>
+      <div class="send-btn-assessment"><button type="submit" class="btn-dark btn-send">Submit</button></div>
+    </form>
+  </div>
+  <script src="/js/header.js"></script>
+
+</body>
+
+</html>

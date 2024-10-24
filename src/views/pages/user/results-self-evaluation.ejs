@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personality Result</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+  <% if (profileType==='analytical' ) {%>
+  <style>
+    .conceptualProfile,
+    .directiveProfile,
+    .behavioralProfile{ opacity: 0.3;}</style>
+    <% } else if (profileType==='conceptual' ) {%>
+  <style>
+    .analyticProfile,
+    .directiveProfile,
+    .behavioralProfile{opacity: 0.3;}</style>
+    <% } else if (profileType==='directive' ) {%>
+  <style>
+    .analyticProfile,
+    .conceptualProfile,
+    .behavioralProfile{opacity: 0.3;}</style>
+    <% } else { %>
+  <style>
+    .analyticProfile,
+    .conceptualProfile,
+    .directiveProfile{opacity: 0.3;}</style>
+  <% }; %>
+<body class="bodyResults">
+  <div class="results">
+    <h1>Your result is</h1>
+    <div class="profileContainer">
+      <div class="analyticProfile">
+        <h2>Analytical profile <span class="icon">📊</span></h2>
+        <p>The analytical decision-making style is characterized by a strong commitment to finding the best possible
+          answer. Individuals with this style enjoy solving complex problems and feel comfortable handling large
+          amounts of information and data. They are innovative, always seeking new approaches and ideas. They like
+          to be in control of situations and do not hesitate to take the necessary time to evaluate all available
+          options, ensuring that the final decision is the most suitable. Additionally, they appreciate variety
+          and new challenges, seeing them as opportunities for growth and learning.</p>
+      </div>
+      <div class="conceptualProfile">
+        <h2>Conceptual profile <span class="icon">💡</span></h2>
+        <p>People with a conceptual decision-making style are achievement-oriented and have a strong inclination
+          towards creativity. They feel comfortable exploring hypothetical scenarios and consider various possibilities
+          ("what if") before making a decision. Generally, they have a broad and open outlook, allowing them to be
+          innovative and think outside the box. Moreover, they take a humanitarian approach, caring about the impact of
+          their
+          decisions on others. They think long-term and are always focused on the future, enjoying the creation
+          and development of new ideas that can bring lasting benefits.</p>
+      </div>
+      <div class="directiveProfile">
+        <h2>Directive profile <span class="icon">🏆</span></h2>
+        <p>The directive decision-making style is defined by a strong focus on results. Individuals with this style
+          primarily rely on established rules and processes to guide their decisions. They tend to be assertive
+          and decisive, preferring to make quick decisions and act swiftly without dwelling on unnecessary details.
+          They have an intuitive nature that allows them to react quickly to situations. They are strong verbal
+          communicators, capable of conveying their decisions clearly and directly, keeping everyone informed
+          about the actions being taken.</p>
+      </div>
+      <div class="behavioralProfile">
+        <h2>Behavioral profile <span class="icon">🤝</span></h2>
+        <p>People with a behavioral decision-making style are very collaborative and work well in teams. They have an
+          empathetic nature, understanding and sharing the feelings of others. Before making decisions, they seek the
+          opinions and feedback of others, ensuring all stakeholders are heard. They gather relevant information, basing
+          their decisions on social intuitions and reading people. Persuasive and effective communicators, they use
+          their interpersonal skills to mobilize others around their ideas and decisions.</p>
+
+      </div>
+    </div>
+    <a class="nextButton" href="/me">Next</a>
+  </div>
+</body>
+
+</html>

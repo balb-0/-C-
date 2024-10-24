@@ -1,0 +1,335 @@
+/* Apply box-sizing: border-box to all elements */
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Styling for the body of the page */
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    max-height: 100%;
+    background-color: #fefefe !important;
+    background-image: none;
+  }
+  
+  /* Remove margin from all paragraphs */
+  p {
+    margin: 0;
+  }
+  
+  /* Styling for the header */
+  .head {
+    background-image: url('/images/backgroundLogin.png');
+    background-position: center left;
+    box-shadow: 0px 2px 6px 0px #00000066;
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    z-index: 0;
+  }
+  
+  /* Styling for the navigation bar */
+  .navega {
+    position: relative;
+    height: 8vh;
+    max-height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5vw;
+  }
+  
+  /* Styling for the navigation list */
+  .lista {
+    position: relative;
+    display: flex;
+    list-style-type: none;
+    margin-bottom: 0;
+  }
+  
+  /* Styling for the navigation links */
+  .item-nav-perfil {
+    color: #fefefe;
+    text-decoration: none;
+  }
+  
+  .item-nav-perfil:hover {
+    text-decoration: none;
+    color: #fefefe;
+  }
+  
+  /* Styling for navigation items */
+  .item {
+    line-height: 8vh;
+    padding: 0 20px;
+    transition: .6s;
+  }
+  
+  .item:hover {
+    background-color: #00000066;
+    cursor: pointer;
+    transition: .6s;
+  }
+  
+  /* Styling for the navigation images */
+  .image-nav {
+    cursor: pointer;
+  }
+  
+  /* Styling for the site logo */
+  .logo-site {
+    margin-bottom: .5vw;
+  }
+  
+  /* Styling for the sidebar */
+  .sidebar-profile {
+    width: 20vw;
+    max-width: 100%;
+    background-color: #4D10A2;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 80vw;
+    transition: transform 1s ease;
+    transform: translateX(100%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Styling for the sidebar when visible */
+  .sidebar-profile[data-visible="true"] {
+    transform: translateX(0);
+    z-index: 100;
+  }
+  
+  /* Styling for the profile info in the sidebar */
+  .sidebar-profile-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10%;
+    gap: 10px;
+  }
+  
+  /* Padding for right-aligned profile info */
+  .sidebar-profile-info-right {
+    padding-top: 10vh;
+  }
+  
+  /* Styling for the logout section of the sidebar */
+  .sidebar-section-logout {
+    padding: 1.5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+  }
+  
+  /* Styling for the close button */
+  .toggle-close {
+    position: absolute;
+    right: 1.5vw;
+    top: 1.5vw;
+    display: block;
+  }
+  
+  /* Styling for sidebar items */
+  .item-sidebar {
+    display: flex;
+    gap: 1vw;
+  }
+  
+  /* Styling for sidebar icons */
+  .icon-sidebar {
+    width: 25px;
+    aspect-ratio: 1;
+  }
+  
+  /* Container for sidebar items */
+  .container-sidebar-items {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    padding: 1.5vw;
+    justify-content: space-between;
+    padding-bottom: 45vh;
+  }
+  
+  /* Styling for the second section of the sidebar */
+  .sidebar-section2 {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+  }
+  
+  /* Styling for sidebar links */
+  .link-sidebar {
+    text-decoration: none;
+    color: #fefefe;
+  }
+  
+  .link-sidebar:hover {
+    text-decoration: none;
+    color: #fefefe;
+  }
+  
+  /* Styling for the logout link */
+  .link-sidebar-logout {
+    color: red;
+  }
+  
+  .link-sidebar-logout:hover {
+    color: red;
+  }
+  
+  /* Styling for profile pictures */
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    aspect-ratio: 1;
+  }
+  
+  /* Styling for profile names */
+  .profile-name {
+    text-decoration: none;
+    color: #fefefe;
+    font-weight: normal;
+    font-size: 1.15rem;
+  }
+  
+  /* Styling for user info in the sidebar */
+  .sidebar-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Styling for the profile card */
+  .profile-card {
+    height: 100vh;
+    width: 20vw;
+    max-width: 100%;
+    box-shadow: 1px 0px 1px #4D10A2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5vh;
+    padding-top: 8vh;
+  }
+  
+  /* Styling for the main section */
+  .main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 100vw;
+    max-width: 100%;
+  }
+  
+  /* Styling for text with class 'out' */
+  .out {
+    color: black;
+    font-size: 1rem;
+  }
+  
+  /* Styling for the edit icon container */
+  .edit-icon-container {
+    position: absolute;
+    bottom: 8%;
+    right: 4%;
+    width: 15%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Styling for the edit icon */
+  .edit-icon {
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+  }
+  
+  /* Styling for the profile picture container */
+  .profile-picture-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Styling for the left-aligned profile info in the sidebar */
+  .sidebar-profile-info-left {
+    gap: .2rem;
+  }
+  
+  /* Styling for the profile indeed section */
+  .profile-indeed {
+    padding: 10% 0 0 10%;
+  }
+  
+  /* Styling for profile pictures in the indeed section */
+  .profile-indeed-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    aspect-ratio: 1;
+  }
+  
+  /* Styling for profile info in the indeed section */
+  .profile-info-indeed {
+    color: black;
+    font-size: 1.5rem;
+  }
+  
+  /* Styling for profile cards in the indeed section */
+  .profile-indeed-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4vw;
+  }
+  
+  /* Styling for profile info in the indeed section */
+  .profile-indeed-info {
+    gap: 1rem;
+  }
+  
+  /* Centering the profile section */
+  .profile-section-center {
+    display: flex;
+    flex-direction: column;
+    gap: 12vh;
+  }
+  
+  /* Styling for the about section in the indeed profile */
+  .profile-indeed-about {
+    border: 2px solid #4D10A2;
+    border-radius: 10px;
+    height: 30vh;
+    width: 30vw;
+    padding: 2%;
+  }
+  
+  
+  .profile-text-box {
+    display: flex;
+    gap: 5vw;
+  }
+  
+  .h2{
+    text-align: center;
+    font-weight: bold;
+    font-size: 3.5rem;
+  }
+  
+  .link-profile-card{
+    text-decoration: none;
+  }

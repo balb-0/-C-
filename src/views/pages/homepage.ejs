@@ -1,0 +1,421 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happiness Meter</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<!-- Header section containing navigation -->
+
+<body>
+  <header class="head">
+    <nav class="navega">
+      <a href="/"><img src="images/logo.svg" class="image-nav logo-site"></a>
+      <ul class="lista">
+        <li class="item"><a href="/group" class="item-nav-perfil">TEAM</a></li>
+        <li class="item"><a href="/questions/external-type" class="item-nav-perfil">ASSESSMENT</a></li>
+        <li class="item"><a href="/feedback" class="item-nav-perfil">FEEDBACKS</a></li>
+      </ul>
+      <!-- SVG for a toggle icon used to open sidebar -->
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="50" viewBox="0,0,300,300"
+        class="image-nav" aria-controls="sidebar" aria-expanded="false" id="toggle">
+        <g fill="#fefefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+          stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+          font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+          <g transform="scale(5.12,5.12)">
+            <path d="M0,9v2h50v-2zM0,24v2h50v-2zM0,39v2h50v-2z"></path>
+          </g>
+        </g>
+      </svg>
+    </nav>
+  </header>
+  <section class="add-msg-section" id="add-msg-section">
+    <div class="area-new-msg">
+      <h2 class="title-add-msg">Send your message!</h2>
+      <textarea class="textarea-add-msg" id="messageContent" required maxlength="580"></textarea>
+      <div class="icons-add-msg">
+        <i class="fa-solid fa-3x fa-circle-xmark button-add-msg close" id="closeMsg"></i>
+        <i class="fa-solid fa-3x fa-circle-right button-add-msg send" id="sendMsg"></i>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mt-5 container-homepage">
+    <div class="row">
+      <!-- Left Sidebar: Teammates -->
+      <div class="col-md-3">
+        <div class="card mb-4">
+          <div class="card-header">
+            Teammates
+          </div>
+          <ul class="list-group list-group-flush">
+            <% if (groupMembers.length > 0) { %>
+              <a href="/profile/<%=tutor.id%>" class="link-profile-card">
+                <li class="list-group-item d-flex align-items-center">
+                  <img src="<%= tutor.photo || '/images/default-profile.png'%>" class="rounded-circle me-2"
+                    alt="<%= tutor.fullName %>" width="40" height="40">
+                  <div class="card-info-homepage">
+                    <strong>
+                      <%= tutor.fullName %>
+                    </strong>
+                    <small>
+                      <%= tutor.emailAddress %>
+                    </small>
+                    <strong>
+                      In <%=tutor.countryId.name%>: <br><i class="fa-regular fa-clock"></i> <%=tutor.timeUser%>
+                    </strong>
+                  </div>
+                </li>
+              </a>
+
+              <% groupMembers.forEach(function(member) { %>
+                <% if(member.id===user.id){return} %>
+                  <a href="/profile/<%=member.id%>" class="link-profile-card">
+                    <li class="list-group-item d-flex align-items-center">
+                      <img src="<%= member.photo || '/images/default-profile.png'%>" class="rounded-circle me-2"
+                        alt="<%= member.fullName %>" width="40" height="40">
+                      <div class="card-info-homepage">
+                        <strong>
+                          <%= member.fullName %>
+                        </strong>
+                        <small>
+                          <%= member.emailAddress %>
+                        </small>
+                        <strong>
+                          In <%=member.countryId.name%>: <br><i class="fa-regular fa-clock"></i> <%=tutor.timeUser%>
+                        </strong>
+                      </div>
+                    </li>
+                  </a>
+                  <% }); %>
+              <%} else {%>
+                <p>You dont have a team, please contact your Tutor</p>
+              <%};%>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-header">
+            Message board
+          </div>
+          <div class="card-body card-message-board">
+            <!-- Message board content here -->
+            <h2 class="h2-message">Message Board</h2>
+            <i class="fa-solid fa-2x fa-circle-plus add-msg"></i>
+            <% if (messages.length> 0) { %>
+              <% messages.forEach(function(message) { %>
+                <div class="message">
+                  <% if (message.userId && message.userId.fullName) { %>
+                    <p>
+                      <strong>
+                        <%= message.userId.fullName %>:
+                      </strong>
+                      <%= message.content %>
+                    </p>
+                    <% } else { %>
+                      <p><strong>Unknown User:</strong>
+                        <%= message.content %>
+                      </p>
+                      <% } %>
+                        <p>
+                          <small>
+                            <%= new Date(message.date).toLocaleString() %>
+                          </small>
+                        </p>
+
+                </div>
+                <% }); %>
+                  <% } else { %>
+                    <p>No messages found.</p>
+                    <% } %>
+          </div>
+        </div>
+        <div class="card card-mid">
+          <div class="card-header">
+            How are you feeling today?
+          </div>
+          <div class="card-body happiness-card">
+            <span class="mood"><i class="fa-regular fa-4x fa-face-angry" data-value="1"
+                style="color: #D60000"></i></span>
+            <span class="mood"><i class="fa-regular fa-4x fa-face-frown" data-value="2"
+                style="color: #FF7A00"></i></span>
+            <span class="mood"><i class="fa-regular fa-4x fa-face-meh" data-value="3" style="color: #FFE500"></i></span>
+            <span class="mood"><i class="fa-regular fa-4x fa-face-smile" data-value="4"
+                style="color: #47C931"></i></span>
+            <span class="mood"><i class="fa-regular fa-4x fa-face-laugh" data-value="5"
+                style="color: #419649"></i></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Sidebar -->
+      <div class="col-md-3">
+        <div class="card col-right">
+          <div class="card-header" id="team-mood">
+            Team Mood
+          </div>
+          <div class="card-body card-body-mood">
+            <ul class="list-group list-group-flush">
+              <% if (groupMembers) {%>
+                <% groupMembers.forEach(function(member) { %>
+                  <li class="mood-list">
+                    <div class="card-info-mood">
+                      <div class="div-imagem">
+                        <img src="<%= member.photo || '/images/default-profile.png'%>"
+                          class="rounded-circle me-2 image-mood" alt="<%= member.fullName %>" width="60" height="60">
+                      </div>
+                      <div class="div-totalmente-teste">
+                        <strong>
+                          <%= member.fullName %>
+                        </strong>
+                        <small>
+                          <%= member.emailAddress %>
+                        </small>
+                        <strong>
+                          <%= member.countryId.name %>
+                        </strong>
+                      </div>
+                      <div class="happiness-indicator">
+                        <% if (member.happinessMeter===1) { %>
+                          <i class="fa-regular fa-4x fa-face-angry" style="color: #D60000"></i>
+                          <% } else if (member.happinessMeter===2) { %>
+                            <i class="fa-regular fa-4x fa-face-frown" style="color: #FF7A00"></i>
+                            <% } else if (member.happinessMeter===3) { %>
+                              <i class="fa-regular fa-4x fa-face-meh" style="color: #FFE500"></i>
+                              <% } else if (member.happinessMeter===4) { %>
+                                <i class="fa-regular fa-4x fa-face-smile" style="color: #47C931"></i>
+                                <% } else if (member.happinessMeter===5) { %>
+                                  <i class="fa-regular fa-4x fa-face-laugh" style="color: #419649"></i>
+                                  <% } else { %>
+                                    <p>No mood set yet.</p>
+                                    <% } %>
+                      </div>
+                    </div>
+                  </li>
+                  <%})%>
+                    <%} else { %>
+                      <p>You are not assigned to a team yet</p><br>
+                      <p>Please contact your Tutor</p>
+                      <% } %>
+            </ul>
+          </div>
+        </div>
+        <div class="card card-mid col-right">
+          <div class="card-header">
+            Game Info
+          </div>
+          <div class="card-body game-info-card">
+            <span class="game-info-text game-info-title">
+              <div>
+                <strong>Round Explanation:</strong>
+              </div>
+              <div>
+                <%= currentRound.explanation %>
+              </div>
+            </span>
+            <span class="game-info-text">
+              <div>
+                <strong>Current Round:</strong>
+              </div>
+              <div>
+                <%= currentRound.roundNumber %>
+              </div>
+            </span>
+            <span class="game-info-text">
+              <strong>Start Date: </strong>
+              <%= currentRound.startDate %>
+            </span>
+            <span class="game-info-text">
+              <strong>End Date: </strong>
+              <%= currentRound.endDate %>
+            </span>
+            <!-- Game Info content here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="sidebar-profile" id="sidebar" data-visible="false">
+    <!-- SVG for a close icon used to close sidebar -->
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
+      class="image-nav toggle-close" aria-controls="sidebar" aria-expanded="true" id="close">
+      <g fill="#fefefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+        stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+        font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <g transform="scale(5.12,5.12)">
+          <path
+            d="M7.71875,6.28125l-1.4375,1.4375l17.28125,17.28125l-17.28125,17.28125l1.4375,1.4375l17.28125,-17.28125l17.28125,17.28125l1.4375,-1.4375l-17.28125,-17.28125l17.28125,-17.28125l-1.4375,-1.4375l-17.28125,17.28125z">
+          </path>
+        </g>
+      </g>
+    </svg>
+    <div class="sidebar-profile-info sidebar-profile-info-right">
+      <img src="<%= user.photo || '/images/default-profile.png'%>" class="profile-picture" alt="<%= user.fullName %>"
+        width="40" height="40">
+      <div class="sidebar-user-info">
+        <strong class="profile-name">
+          <%=user.fullName%>
+        </strong>
+        <strong class="profile-name">
+          <%=user.userType[0].toUpperCase() + user.userType.slice(1)%>
+        </strong>
+      </div>
+    </div>
+    <div class="container-sidebar-items">
+      <!-- Sidebar navigation items -->
+      <div class="sidebar-section sidebar-section2">
+        <div class="item-sidebar profile">
+          <img src="images/profile.svg" alt="" class="icon-sidebar">
+          <p class="text-sidebar"><a href="/me" class="link-sidebar">My profile</a></p>
+        </div>
+        <div class="item-sidebar home">
+          <img src="images/home.svg" alt="" class="icon-sidebar">
+          <p class="text-sidebar"><a href="/" class="link-sidebar">Home</a></p>
+        </div>
+        <% if (user.userType==='admin' ) { %>
+          <div class="item-sidebar admin">
+            <img src="images/admin-white.png" alt="" class="icon-sidebar">
+            <p class="text-sidebar">
+              <a href="/admin" class="link-sidebar">Admin</a>
+            </p>
+          </div>
+          <% } %>
+            <% if (user.userType==='admin' || user.userType==='tutor' ) { %>
+              <div class="item-sidebar tutor">
+                <img src="images/criarGrupo-white.png" alt="" class="icon-sidebar">
+                <p class="text-sidebar">
+                  <a href="/game" class="link-sidebar">Create Team</a>
+                </p>
+              </div>
+              <% } %>
+      </div>
+    </div>
+    <div class="sidebar-section sidebar-section-logout">
+      <!-- Sidebar help and logout items -->
+      <div class="item-sidebar logout">
+        <img src="images/logout.svg" alt="" class="icon-sidebar">
+        <p class="text-sidebar text-logout"><a href="/logout" class="link-sidebar link-sidebar-logout">Logout</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <script>
+    // Happiness meter script to trigger post onclick on fontawesome icons
+    $(document).ready(function () {
+      $('.happiness-card span i').on('click', function () {
+        const value = $(this).data('value');
+        $.ajax({
+          url: '/happiness-meter',
+          method: 'POST',
+          data: { happiness: value },
+          success: function (response) {
+            alert('Happiness level updated successfully!');
+            // Atualize a div "Team Mood"
+            location.reload(); // Refresh the page
+            updateTeamMood(value);
+          },
+          error: function (xhr, status, error) {
+            console.error('Error:', error);
+            alert('Failed to update happiness level.');
+          }
+        });
+      });
+    });
+
+    const addMsg = window.document.querySelector('.add-msg')
+    const closeMsg = window.document.querySelector('.close')
+    const sendMsg = window.document.querySelector('.send')
+    addMsg.addEventListener('click', () => {
+      window.document.querySelector('.add-msg-section').setAttribute('style', 'display: flex')
+    })
+
+    closeMsg.addEventListener('click', () => {
+      window.document.querySelector('.add-msg-section').setAttribute('style', 'display: none')
+    })
+
+    sendMsg.addEventListener('click', () => {
+      const messageContent = document.getElementById('messageContent').value;
+
+      if (messageContent.trim() === "") {
+        alert("Message cannot be empty!");
+        return;
+      }
+
+      fetch('/me/message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          content: messageContent,
+        })
+      })
+        .then(response => {
+          // Check if the response is successful
+          if (!response.ok) {
+            throw new Error(`Server error: ${response.status} ${response.statusText}`);
+          }
+          // Check if response is not empty before parsing
+          return response.text().then(text => {
+            return text ? JSON.parse(text) : {};
+          });
+        })
+        .then(data => {
+          console.log('Server response:', data); // Log the server response
+
+          if (!data.success) {
+            alert('Message sent successfully!');
+            window.document.querySelector('.add-msg-section').setAttribute('style', 'display: none') // close message modal
+            location.reload(); // Refresh the page
+          } else {
+            alert('Failed to send message.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while sending the message.');
+        });
+    });
+
+    $(document).ready(function () {
+      // Enviar mensagem ao pressionar "Enter"
+      $('#messageContent').on('keypress', function (e) {
+        if (e.which === 13 && !e.shiftKey) {
+          e.preventDefault();
+        }
+      });
+
+      // Fechar a seção ao pressionar "Esc" ou clicar no fundo
+      $(document).on('keydown', function (e) {
+        if (e.key === "Escape") {
+          closeMessageSection();
+        }
+      });
+
+      $('#add-msg-section').on('click', function (e) {
+        if ($(e.target).is('#add-msg-section')) {
+          closeMessageSection();
+        }
+      });
+
+      $('#closeMsg').on('click', closeMessageSection);
+
+
+      function closeMessageSection() {
+        $('#add-msg-section').hide();
+      }
+    });
+
+
+  </script>
+</body>
+
+</html>

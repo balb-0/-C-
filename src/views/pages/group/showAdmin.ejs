@@ -1,0 +1,107 @@
+<div class="container">
+  <h1 class="mt-5">Manage Group</h1>
+
+  <div class="row">
+    <!-- Group Details -->
+    <div class="col-md-6">
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">Group Details</h5>
+          <form id="update-group-form">
+            <div class="form-group">
+              <label for="groupName">Group Name</label>
+              <input type="text" class="form-control" id="groupName" value="<%= group.name %>">
+            </div>
+            <div class="form-group">
+              <label for="groupTutor">Tutor</label>
+              <select class="form-control" id="groupTutor">
+                <% tutors.forEach(function(tutor) { %>
+                  <option value="<%= tutor.id %>" <%= tutor.id === group.tutorId.id ? 'selected' : '' %>><%= tutor.fullName %></option>
+                <% }); %>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Group</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group Members -->
+    <div class="col-md-6">
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">Group Members</h5>
+          <ul class="list-group">
+            <% group.students.forEach(function(student) { %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= student.userId.fullName %> (<%= student.userId.emailAddress %>)
+                <button class="btn btn-danger btn-sm remove-student" data-id="<%= student.id %>">Remove</button>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Add Member -->
+    <div class="col-md-12">
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">Add Member</h5>
+          <form id="add-student-form">
+            <div class="form-group">
+              <label for="studentId">Select Student</label>
+              <select class="form-control" id="studentId">
+                <% students.forEach(function(student) { %>
+                  <option value="<%= student.id %>"><%= student.fullName %> (<%= student.emailAddress %>)</option>
+                <% }); %>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Student</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  // Update group details
+  $('#update-group-form').on('submit', function(e) {
+    e.preventDefault();
+    const groupId = '<%= group.id %>';
+    const name = $('#groupName').val();
+    const tutorId = $('#groupTutor').val();
+    $.post('/group/' + groupId + '/update', { name, tutorId }, function(response) {
+      alert('Group updated successfully');
+      location.reload();
+    }).fail(function(err) {
+      alert('Error updating group');
+    });
+  });
+  // Add student to group
+  $('#add-student-form').on('submit', function(e) {
+    e.preventDefault();
+    const groupId = '<%= group.id %>';
+    const userId = $('#studentId').val();
+    $.post('/group/' + groupId + '/addStudent', { userId }, function(response) {
+      alert('Student added successfully');
+      location.reload();
+    }).fail(function(err) {
+      alert('Error adding student');
+    });
+  });
+  // Remove student from group
+  $('.remove-student').on('click', function() {
+    const studentId = $(this).data('id');
+    $.post('/group/<%= group.id %>/removeStudent', { studentId }, function(response) {
+      alert('Student removed successfully');
+      location.reload();
+    }).fail(function(err) {
+      alert('Error removing student');
+    });
+  });
+</script>

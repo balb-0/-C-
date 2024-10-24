@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Not Assigned to Any Groups</title>
+</head>
+<div class="no-group">
+    <body>
+        <div class="container-error">
+            <% if (errorType === 'noGroup') { %>
+            <form action="/me">
+                <div class="title-subtitle-error">
+                    <div class="main-title-error"><h2>Error - You're not assigned to any groups</h2></div>
+                    <h4>To perform this action you must have teammates to evaluate</h4>
+                </div>
+                <div class="text-error">
+                    <h5>
+                        Assessments are made for you to evaluate other teammates according to parameters previously stabilished. As you haven't been
+                        assigned to any team yet, you can't perform this action for now.
+                    </h5>
+                </div>
+                <div class="btn-error"><button class="btn-dark btn-sign" type="submit">Return</button></div>
+            </form>
+            <% } else if (errorType === 'assignStudents') { %>
+            <form action="/game">
+                <div class="title-subtitle-error">
+                    <div class="main-title-error"><h2>Error - Teams must have students</h2></div>
+                    <h4>To set up a team, you must assign students to it</h4>
+                </div>
+                <div class="text-error">
+                    <h5>
+                        Teams must have at least one student as a member of it. You can assign students to a team by searching their email address and
+                        then clicking on it.
+                    </h5>
+                </div>
+                <div class="btn-error"><button class="btn-dark btn-sign" type="submit">Return</button></div>
+            </form>
+            <% } %>
+        </div>
+    </body>
+</div>
+</html>

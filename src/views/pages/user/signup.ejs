@@ -1,0 +1,113 @@
+
+<head>
+  <!-- Metadata and title for the sign-up page -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+</head>
+
+<body class="bg-fade">
+  <!-- Container for the sign-up form -->
+  <div class="div-sign">
+    <!-- Title of the sign-up page -->
+    <h1 class="titulo-signup">Code Connecting Cultures</h1>
+    <div class="sign-container">
+      <!-- Subtitle for the sign-up section -->
+      <h2 class="titulo-card-signup">Sign Up</h2>
+      <!-- Sign-up form with POST method to '/signup' -->
+      <form id="signupForm" action="/signup" method="POST" onsubmit="submitForm(event)">
+        <!-- Full Name input field -->
+        <div class="">
+          <label for="fullName" class="form-label login-info">Full Name</label>
+          <input type="text" class="form-control-sign" id="fullName" name="fullName" required="true" placeholder="John Jonah Jameson">
+        </div>
+        <!-- Email address input field -->
+        <div class="mb-3">
+          <label for="emailAddress" class="form-label login-info">Email address</label>
+          <input type="email" class="form-control-sign" id="emailAddress" name="emailAddress" placeholder="example@domain.com">
+        </div>
+        <!-- Password input field -->
+        <div class="mb-3">
+          <label for="password" class="form-label login-info">Password</label>
+          <input type="password" class="form-control-sign" id="password" name="password" required="true" placeholder="Everyone's got a secret">
+        </div>
+        <!-- Birthday input field -->
+        <div class="mb-3">
+          <label for="birthday" class="form-label login-info">Birthday</label>
+          <input type="date" class="form-control-sign" id="birthday" name="birthday" required="true">
+        </div>
+        <!-- Country of Origin input field -->
+        <div class="div-flex-horizontal">
+          <div class="mb-3 itens-flex-horizontal">
+            <label for="countryId" class="form-label login-info">Country of Residence</label>
+            <select class="form-control-sign form-control-flex" id="countryId" name="countryId" required>
+              <% countries.forEach(function(country) { %>
+                <option value="<%= country.id %>">
+                  <%= country.name %>
+                </option>
+                <% }); %>
+            </select>
+          </div>
+          <!-- Timezone selection dropdown, pre-selected with user data -->
+          <div class="mb-3 itens-flex-horizontal">
+            <div class="flex-item-filho">
+              <label for="timezoneId" class="form-label login-info form-texto">Timezone</label>
+              <select class="form-control-sign form-control-flex form-control-sign2" id="timezoneId" name="timezoneId" required>
+                <% timezones.forEach(function(timezone) { %>
+                  <option value="<%= timezone.id %>">
+                    <%= timezone.name %>
+                  </option>
+                  <% }); %>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- Gender selection dropdown -->
+        <div class="mb-3">
+          <label for="gender" class="form-label login-info">Gender</label>
+          <select class="form-control-sign" id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <!-- Hidden input to set user type to 'student' -->
+        <input type="hidden" id="userType" name="userType" value="student">
+        <!-- Submit button wrapped in a link for navigation to the next step -->
+        <button type="submit" class="btn-dark btn-sign">Next</button>
+      </form>
+    </div>
+  </div>
+</body>
+<script>
+  async function submitForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (response.status === 409) {
+        alert('Email address is already in use, please use another one.');
+      } else if (response.ok) {
+        window.location.href = '/signup2';
+      } else {
+        console.error('Unexpected response:', result);
+        alert('An unexpected error occurred.');
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      alert('An error occurred while submitting the form. Please try again later.');
+    }
+  }
+</script>

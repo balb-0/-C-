@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body class="body-login">
+  <div class="div-login">
+    <h1 class="titulo-login">Code Connecting Cultures</h1>
+    <div class="login-container">
+      <h2 class="titulo-card-login">Login</h2>
+      <form id="loginForm" action="/login" method="POST" class="login-form">
+        <div class="mb-3">
+          <label for="emailAddress" class="form-label login-info">Email</label>
+          <input type="email" class="form-control" id="emailAddress" name="emailAddress" required>
+        </div>
+        <div class="mb-3 password">
+          <label for="password" class="form-label login-info password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <% if (typeof error !=='undefined' ) { %>
+          <div class="alert alert-danger mb-3" role="alert">
+            <%= error %>
+          </div>
+        <% } %>
+        <div class="new-account">
+          <a href="/forgot-password" class="text-credentials">Forgot your password?</a></p>
+          <a href="/signup" class="text-credentials">Don't have an account? Create one</a>
+        </div>
+        <div class="sign-btn-login"><button type="submit" class="btn-dark btn-sign">Sign in</button></div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

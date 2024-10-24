@@ -1,0 +1,235 @@
+<!-- Header section containing navigation -->
+<header class="head">
+  <nav class="navega">
+    <a href="/"><img src="/images/logo.svg" class="image-nav logo-site"></a>
+    <ul class="lista">
+      <li class="item"><a href="/group" class="item-nav-perfil">TEAM</a></li>
+      <li class="item"><a href="/questions/external-type" class="item-nav-perfil">ASSESSMENT</a></li>
+      <li class="item"><a href="/feedback" class="item-nav-perfil">FEEDBACKS</a></li>
+    </ul>
+    <!-- SVG for a toggle icon used to open sidebar -->
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="50" viewBox="0,0,300,300"
+      class="image-nav" aria-controls="sidebar" aria-expanded="false" id="toggle">
+      <g fill="#fefefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+        stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+        font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <g transform="scale(5.12,5.12)">
+          <path d="M0,9v2h50v-2zM0,24v2h50v-2zM0,39v2h50v-2z"></path>
+        </g>
+      </g>
+    </svg>
+  </nav>
+</header>
+
+<body class="personal-type">
+  <div class="container-create-group" height="80%" width="80%">
+    <h2 class="mt-5">Create Team</h2>
+    <form action="/group/create" method="POST" class="form-label">
+      <div class="mb-3">
+        <label for="name" class="form-label">Team Name</label>
+        <select class="form-labelGroup" id="name" name="name" required>
+          <option value="Red">Red</option>
+          <option value="Green">Green</option>
+          <option value="Blue">Blue</option>
+          <option value="Orange">Orange</option>
+          <option value="Grey">Grey</option>
+          <option value="Ochre">Ochre</option>
+          <option value="Pink">Pink</option>
+          <option value="Navy">Navy</option>
+          <option value="Yellow">Yellow</option>
+          <option value="Olive">Olive</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="tutorId" class="form-label">Tutor</label>
+        <select class="form-controlGroup" id="tutorId" name="tutorId" required>
+          <% tutors.forEach(function(tutor) { %>
+            <option value="<%= tutor.id %>">
+              <%= tutor.fullName %>
+            </option>
+            <% }); %>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="studentIds" class="form-label">Students</label><br>
+        <input class="form-controlGroup" id="emailInput" type="text" placeholder="Search for students by email address">
+        <ul id="suggestions" class="list-group"></ul>
+        <div id="selected-users"></div>
+        <input type="hidden" id="studentIds" name="studentIds">
+      </div>
+      <input type="hidden" id="universeId" name="universeId" value="<%= universe.id %>">
+      <button type="submit" class="createGroupButton">Create Team</button>
+    </form>
+  </div>
+
+
+  <script>
+    $(document).ready(function () {
+      $('#emailInput').on('keyup', function () {
+        const query = $(this).val();
+        if (query.length > 1) {
+          $.ajax({
+            url: '/group/create/findUserByEmail',
+            data: { emailAddress: query },
+            success: function (data) {
+              let suggestions = '';
+              data.forEach(function (user) {
+                suggestions += `<li data-id="${user.id}" data-email="${user.emailAddress}" data-name="${user.fullName}">${user.fullName} (${user.emailAddress})</li>`;
+              });
+              $('#suggestions').html(suggestions).show();
+            }
+          });
+        } else {
+          $('#suggestions').hide();
+        }
+      });
+
+      $(document).on('click', '#suggestions li', function () {
+        const id = $(this).data('id');
+        const email = $(this).data('email');
+        const userHtml = `<div class="selected-user" data-id="${id}">${email} (${email})<span class="remove-user">&times;</span></div>`;
+        $('#selected-users').append(userHtml);
+        $('#emailInput').val('');
+        $('#suggestions').hide();
+        updateStudentIds();
+      });
+
+      $(document).on('click', '.remove-user', function () {
+        $(this).parent('.selected-user').remove();
+        updateStudentIds();
+      });
+
+      function updateStudentIds() {
+        const selectedUserIds = $('.selected-user').map(function () {
+          return $(this).data('id');
+        }).get();
+        $('#studentIds').val(selectedUserIds.join(','));
+      }
+    });
+  </script>
+
+
+</body>
+
+<!-- Sidebar for profile navigation -->
+<section class="sidebar-profile" id="sidebar" data-visible="false">
+  <!-- SVG for a close icon used to close sidebar -->
+  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
+    class="image-nav toggle-close" aria-controls="sidebar" aria-expanded="true" id="close">
+    <g fill="#fefefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+      stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+      font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+      <g transform="scale(5.12,5.12)">
+        <path
+          d="M7.71875,6.28125l-1.4375,1.4375l17.28125,17.28125l-17.28125,17.28125l1.4375,1.4375l17.28125,-17.28125l17.28125,17.28125l1.4375,-1.4375l-17.28125,-17.28125l17.28125,-17.28125l-1.4375,-1.4375l-17.28125,17.28125z">
+        </path>
+      </g>
+    </g>
+  </svg>
+  <div class="sidebar-profile-info sidebar-profile-info-right">
+    <img src="<%= user.photo || '/images/default-profile.png'%>" class="profile-picture" alt="<%= user.fullName %>"
+      width="40" height="40">
+    <div class="sidebar-user-info">
+      <strong class="profile-name">
+        <%=user.fullName%>
+      </strong>
+      <strong class="profile-name">
+        <%=user.userType[0].toUpperCase() + user.userType.slice(1)%>
+      </strong>
+    </div>
+  </div>
+  <div class="container-sidebar-items">
+    <!-- Sidebar navigation items -->
+    <div class="sidebar-section sidebar-section2">
+      <div class="item-sidebar profile">
+        <img src="/images/profile.svg" alt="" class="icon-sidebar">
+        <p class="text-sidebar"><a href="/me" class="link-sidebar">My profile</a></p>
+      </div>
+      <div class="item-sidebar home">
+        <img src="/images/home.svg" alt="" class="icon-sidebar">
+        <p class="text-sidebar"><a href="#" class="link-sidebar">Home</a></p>
+      </div>
+      <% if (user.userType==='admin' ) { %>
+        <div class="item-sidebar admin">
+          <img src="/images/admin-white.png" alt="" class="icon-sidebar">
+          <p class="text-sidebar">
+            <a href="/admin" class="link-sidebar">Admin</a>
+          </p>
+        </div>
+        <% } %>
+          <% if (user.userType==='admin' || user.userType==='tutor' ) { %>
+            <div class="item-sidebar tutor">
+              <img src="/images/criarGrupo-white.png" alt="" class="icon-sidebar">
+              <p class="text-sidebar">
+                <a href="/game" class="link-sidebar">Create Group</a>
+              </p>
+            </div>
+            <% } %>
+    </div>
+  </div>
+  <div class="sidebar-section sidebar-section-logout">
+    <!-- Sidebar help and logout items -->
+    <div class="sidebar-section sidebar-section3">
+      <div class="item-sidebar help">
+        <img src="/images/help.svg" alt="" class="icon-sidebar">
+        <p class="text-sidebar"><a href="#" class="link-sidebar">Help</a></p>
+      </div>
+    </div>
+    <div class="item-sidebar logout">
+      <img src="/images/logout.svg" alt="" class="icon-sidebar">
+      <p class="text-sidebar text-logout"><a href="/logout" class="link-sidebar link-sidebar-logout">Logout</a></p>
+    </div>
+  </div>
+</section>
+
+  <!-- Script to handle sidebar toggle functionality -->
+  <script>
+    // Get references to the sidebar, toggle button, and close button elements
+    const sidebar = document.querySelector("#sidebar");
+    const toggle = document.querySelector("#toggle");
+    const close = document.querySelector("#close");
+
+    // Add a click event listener to the toggle button
+    toggle.addEventListener('click', () => {
+      // Check if the sidebar is currently visible
+      const isVisible = sidebar.getAttribute('data-visible') === 'true';
+
+      if (isVisible) {
+        // If the sidebar is visible, hide it
+        sidebar.setAttribute('data-visible', 'false');
+        toggle.setAttribute('aria-expanded', 'false');
+        sidebar.style.zIndex = '1';
+      } else {
+        // If the sidebar is hidden, show it
+        sidebar.setAttribute('data-visible', 'true');
+        toggle.setAttribute('aria-expanded', 'true');
+        sidebar.style.zIndex = '100';
+      }
+    });
+
+    // Add a click event listener to the close button
+    close.addEventListener('click', () => {
+      // Hide the sidebar when the close button is clicked
+      sidebar.setAttribute('data-visible', 'false');
+      toggle.setAttribute('aria-expanded', 'false');
+      sidebar.style.zIndex = '1';
+    });
+
+
+    // Add a click event listener to the entire document
+    document.addEventListener('click', (event) => {
+      // Check if the click occurred inside the sidebar
+      const isClickInsideSidebar = sidebar.contains(event.target);
+      // Check if the click occurred on the toggle button or close button
+      const isClickOnToggle = toggle.contains(event.target) || close.contains(event.target);
+
+      // If the click was outside the sidebar and not on the toggle or close button
+      if (!isClickInsideSidebar && !isClickOnToggle) {
+        // Hide the sidebar
+        sidebar.setAttribute('data-visible', 'false');
+        toggle.setAttribute('aria-expanded', 'false');
+        sidebar.style.zIndex = '1';
+      }
+    });
+
+  </script>

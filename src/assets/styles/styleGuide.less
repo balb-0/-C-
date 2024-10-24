@@ -1,0 +1,132 @@
+// This style guide defines the CSS rules for the web application project.
+
+* {
+    box-sizing: border-box;
+}
+
+// Typography
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+h2 {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+h5 {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.button {
+    font-size: 1.5rem;
+}
+.info {
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+.question-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+// Color
+body {
+    background-image: url('../../images/backgroundLogin.png') !important; // image used as background-color
+    background-repeat: no-repeat;
+    background-color: #fefefe !important;
+    background-size: cover; // change as needed
+    background-position: center; // can be changed to 'left' or 'right' as needed
+}
+.container {
+    background-color: #fefefe;
+}
+.button {
+    background-color: #4D10A2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 300ms;
+}
+    .button:hover {
+        background-color: #8A2BE2;
+        transition: 300ms;
+    }
+.select {
+    border: 0.125rem solid #ccc;
+    background-color: #fefefe;
+    transition: border-color 300ms;
+}
+    .select:focus {
+        border: 2px solid #4D10A2;
+        outline: none;
+        box-shadow: none;    
+    }
+.question-body {
+    background-color: #D9D9D9;
+    border: 0.0625rem solid #dadce0;
+}
+
+// Layout
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    max-height: 100%;
+    justify-content: center; // can be changed to 'space-betweem' as needed
+}
+h2 {
+    position: relative;
+    margin: 0;
+    margin-top: 1rem;
+}
+h5 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+input {
+    margin-bottom: 1rem;
+}
+    input[type="radio"] {
+        margin: 0 1rem 0 1rem;
+        transform: scale(1.5);
+    }
+.container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.25rem;
+    justify-content: center; // can be changed to 'space-betweem' as needed
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    width: 100%; // increase with more rem if necessary
+}
+.button {
+    border-radius: 1.25rem;
+    padding: 1rem 1.5rem;
+}
+.select {
+    display: block;
+    width: 100%;
+    padding: 0.625rem;
+    border-radius: 0;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.question-body {
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.answer-item {
+    display: flex;
+}

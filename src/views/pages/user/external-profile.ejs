@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <header class="head">
+    <nav class="navega">
+      <a href="/"><img src="/images/logo.svg" class="image-nav logo-site"></a>
+      <ul class="lista">
+        <li class="item"><a href="/group" class="item-nav-perfil">TEAM</a></li>
+        <li class="item"><a href="/questions/external-type" class="item-nav-perfil">ASSESSMENT</a></li>
+        <li class="item"><a href="/feedback" class="item-nav-perfil">FEEDBACKS</a></li>
+      </ul>
+      <!-- SVG for a toggle icon used to open sidebar -->
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="50" viewBox="0,0,300,300"
+        class="image-nav" aria-controls="sidebar" aria-expanded="false" id="toggle">
+        <g fill="#fefefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+          stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+          font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+          <g transform="scale(5.12,5.12)">
+            <path d="M0,9v2h50v-2zM0,24v2h50v-2zM0,39v2h50v-2z"></path>
+          </g>
+        </g>
+      </svg>
+    </nav>
+  </header>
+    <main>
+        <section class="profile-indeed">
+            <div class="profile-section-center">
+              <div class="sidebar-profile-info profile-indeed-card">
+                <div class="profile-picture-container">
+                  <img src="<%= teammate.photo || '/images/default-profile.png'%>" class="profile-indeed-picture"
+                    alt="<%= teammate.fullName %>" width="40" height="40">
+                </div>
+                <div class="sidebar-user-info sidebar-profile-info-left profile-indeed-info">
+                  <strong class="profile-name profile-info-indeed">
+                    <%=teammate.fullName%>
+                  </strong>
+                  <strong class="profile-name profile-info-indeed">
+                    <%=teammate.userType%>
+                  </strong>
+                  <strong class="profile-name profile-info-indeed">
+                    Decision Making: <%=teammate.personalProfileType%>
+                  </strong>
+                  <strong class="profile-name profile-info-indeed">
+                    Birthday: <%= dateTeammate %>
+                  </strong>
+                  <strong class="profile-name profile-info-indeed">
+                    Time at <%= teammate.countryId.name %>: <%= timeTeammate %>
+                  </strong>
+                </div>
+              </div>
+              <div class="profile-text-box">
+                <div>
+                  <h3>About Me</h3>
+                  <div class="profile-indeed-about">
+                    <p>
+                      <%=teammate.aboutMe%>
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <h3>About My Country</h3>
+                  <div class="profile-indeed-about">
+                    <p>
+                      <%=teammate.countryPov%>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    </main>
+
+    <section class="sidebar-profile" id="sidebar" data-visible="false">
+    <!-- SVG for a close icon used to close sidebar -->
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
+      class="image-nav toggle-close" aria-controls="sidebar" aria-expanded="true" id="close">
+      <g fill="#fefefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+        stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+        font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <g transform="scale(5.12,5.12)">
+          <path
+            d="M7.71875,6.28125l-1.4375,1.4375l17.28125,17.28125l-17.28125,17.28125l1.4375,1.4375l17.28125,-17.28125l17.28125,17.28125l1.4375,-1.4375l-17.28125,-17.28125l17.28125,-17.28125l-1.4375,-1.4375l-17.28125,17.28125z">
+          </path>
+        </g>
+      </g>
+    </svg>
+    <div class="sidebar-profile-info sidebar-profile-info-right">
+      <img src="<%= user.photo || '/images/default-profile.png'%>" class="profile-picture" alt="<%= user.fullName %>"
+        width="40" height="40">
+      <div class="sidebar-user-info">
+        <strong class="profile-name">
+          <%=user.fullName%>
+        </strong>
+        <strong class="profile-name">
+          <%=user.userType%>
+        </strong>
+      </div>
+    </div>
+    <div class="container-sidebar-items">
+      <!-- Sidebar navigation items -->
+      <div class="sidebar-section sidebar-section2">
+        <div class="item-sidebar profile">
+          <img src="/images/profile.svg" alt="" class="icon-sidebar">
+          <p class="text-sidebar"><a href="/me" class="link-sidebar">My profile</a></p>
+        </div>
+        <div class="item-sidebar home">
+          <img src="/images/home.svg" alt="" class="icon-sidebar">
+          <p class="text-sidebar"><a href="/" class="link-sidebar">Home</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-section sidebar-section-logout">
+      <!-- Sidebar help and logout items -->
+      <div class="sidebar-section sidebar-section3">
+        <div class="item-sidebar help">
+          <img src="/images/help.svg" alt="" class="icon-sidebar">
+          <p class="text-sidebar"><a href="#" class="link-sidebar">Help</a></p>
+        </div>
+      </div>
+      <div class="item-sidebar logout">
+        <img src="/images/logout.svg" alt="" class="icon-sidebar">
+        <p class="text-sidebar text-logout"><a href="/logout" class="link-sidebar link-sidebar-logout">Logout</a></p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

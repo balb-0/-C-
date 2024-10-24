@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assessment</title>
+</head>
+
+<body class="personal-type">
+  <div class="div-questions">
+    <div class="question-container">
+      <div class="test-header">
+        <h1>Assessment</h1>
+      </div>
+      <div class="test-explanation">
+        <% if (questionType === 'collaboration') { %>
+        <h5>
+          The external-evaluation form is designed to assess and validate a teammate's decision-making tendencies through
+          a series of statements. Each statement requires respondents to indicate their level of agreement, with options
+          ranging from "agree," "partially agree," "neutral," "partially disagree," to "disagree." This format aims to
+          gather insights into how individuals approach task clarity, adaptability to change, planning methods, reliance on
+          data versus intuition, and ethical considerations in decision-making. The responses help categorize teammates
+          into distinct profiles, ranging from those who take charge and lead decisively, to those who prefer to maintain
+          harmony, follow established guidelines, initiate new ideas, or analyze information thoroughly before making
+          decisions.
+        </h5>
+        <% } else { %>
+          <h5>
+            The self-evaluation form focuses on assessing decision-making tendencies through seven questions. Each
+            question presents a scenario with two alternative choices, and respondents select the option that aligns most
+            closely with their approach to decision-making. The form aims to provide insights into individuals'
+            preferences regarding clarity of tasks, adaptability to change, planning methods, reliance on data versus
+            intuition, and ethical considerations in decision-making. Responses categorize individuals into distinct
+            decision-making styles, emphasizing analytical thinking and consideration of various factors in
+            decision-making processes.
+          </h5>
+        <% } %>
+      </div>
+    <% questionsType = questions[0].questionType[2]%>
+    <form action="/questions/<%=questionsType%>" method="post">
+      <% if (questionsType === "radio_choice") { %>
+        <select id="toUserId" class="form-select-feedback my-5" name="toUserId" required>
+          <% groupMembers.forEach(function(member) { %>
+            <% if(member.id === user.id){return} %>
+            <option value="<%= member.id %>">
+              <%= member.fullName %> (<%= member.emailAddress %>)
+            </option>
+          <% }); %>
+        </select>
+      <% } %>
+      <% questions.forEach((question, index) => { %>
+        <div class="question-model">
+          <div class="question-header">
+            <h5><%= question.questionText %></h5>
+          </div>
+          <% if (questionsType !== "radio_choice") { %>
+            <div class="binary-answers">
+              <div class="binary-answer-item">
+                <input type="radio" id="radio1-<%= index %>" name="answers[<%= index %>][questionAnswer]" value="1" alt="option 1" required/>
+                <label for="radio1-<%= index %>"></label>
+                <p><%= question.alternatives[0] %></p>
+                <input type="hidden" name="answers[<%= index %>][questionId]" value="<%= question.id %>">
+                <input type="hidden" name="answers[<%= index %>][questionType]" value="<%= question.questionType %>">
+              </div>
+              <div class="binary-answer-item">
+                <input type="radio" id="radio2-<%= index %>" name="answers[<%= index %>][questionAnswer]" value="2" alt="option 2" required />
+                <label for="radio2-<%= index %>"></label>
+                <p><%= question.alternatives[1] %></p>
+              </div>
+            </div>
+          <% } else { %>
+            <div class="answers">
+              <div class="answer-item">
+                <% question.alternatives.forEach((alternative, altIndex) => { %>
+                  <div class="radio-wrapper">
+                    <span class="alternative-text"><%= alternative %></span>
+                    <input type="radio" id="radio<%= index %>-<%= altIndex %>" name="answers[<%= index %>][questionAnswer]" value="<%= altIndex - 2 %>" alt="<%= alternative %>" required />
+                    <label for="radio<%= index %>-<%= altIndex %>"></label>
+                  </div>
+                <% }); %>
+                <input type="hidden" name="answers[<%= index %>][questionId]" value="<%= question.id %>">
+                <input type="hidden" name="answers[<%= index %>][questionType]" value="<%= question.questionType %>">
+              </div>
+            </div>
+          <% } %>
+        </div>
+      <% }); %>
+      <div class="button-container">
+        <button class="button" id="send-button" type="submit">Send</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</body>
+
+</html>

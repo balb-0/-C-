@@ -1,0 +1,73 @@
+<!-- Container for the edit profile section with background fade effect -->
+<div class="div-sign bg-fade">
+  <!-- Title for the edit profile page -->
+  <h1 class="titulo-signup">Edit your Profile.</h1>
+  <div class="sign-container">
+    <!-- Subtitle for the profile update form with top margin -->
+    <h2 class="mt-5 titulo-card-signup">Update Profile</h2>
+    <!-- Form for updating user profile, with POST method to '/updateUser' -->
+    <form id="updateProfileForm" action="/updateUser" method="POST">
+      <!-- Full Name input field, pre-filled with user data -->
+      <div class="mb-3">
+        <label for="fullName" class="form-label login-info form-texto">Full Name</label>
+        <input type="text" class="form-control-sign form-control-sign2" id="fullName" name="fullName"
+          value="<%= user.fullName %>" required>
+      </div>
+      <!-- Birthday input field, pre-filled with user data -->
+      <div class="mb-3">
+        <label for="birthday" class="form-label login-info form-texto">Birthday</label>
+        <input type="date" class="form-control-sign form-control-sign2" id="birthday" name="birthday"
+          value="<%= user.birthday %>">
+      </div>
+      <!-- About My Country textarea, pre-filled with user data -->
+      <div class="mb-3">
+        <label for="countryPov" class="form-label login-info form-texto">About My Country</label>
+        <textarea class="form-control-sign" id="countryPov" name="countryPov"><%= user.countryPov %></textarea>
+      </div>
+      <!-- About Me textarea, pre-filled with user data -->
+      <div class="mb-3">
+        <label for="aboutMe" class="form-label login-info form-texto">About Me</label>
+        <textarea class="form-control-sign" id="aboutMe" name="aboutMe"><%= user.aboutMe %></textarea>
+      </div>
+      <!-- Gender selection dropdown, pre-selected with user data -->
+      <div class="mb-3">
+        <label for="gender" class="form-label login-info form-texto">Gender</label>
+        <select class="form-control-sign form-control-sign2" id="gender" name="gender" required>
+          <option value="male" <%=user.gender==='male' ? 'selected' : '' %>>Male</option>
+          <option value="female" <%=user.gender==='female' ? 'selected' : '' %>>Female</option>
+          <option value="other" <%=user.gender==='other' ? 'selected' : '' %>>Other</option>
+        </select>
+      </div>
+      <!-- Timezone selection dropdown, pre-selected with user data -->
+      <div class="mb-3">
+        <label for="timezoneId" class="form-label login-info form-texto">Timezone</label>
+        <select class="form-control-sign form-control-sign2" id="timezoneId" name="timezoneId" required>
+          <% timezones.forEach(function(timezone) { %>
+            <option value="<%= timezone.id %>" <%=user.timezoneId===timezone.id ? 'selected' : '' %>><%= timezone.name
+                %>
+            </option>
+            <% }); %>
+        </select>
+      </div>
+      <!-- Submit button to update profile -->
+      <div class="sign-btn">
+        <button type="submit" class="btn-dark btn-sign">Update</button>
+      </div>
+    </form>
+
+    <!-- Subtitle for the profile photo update form with top margin -->
+    <h2 class="mt-5 titulo-card-signup">Update Profile Photo</h2>
+    <!-- Form for updating user profile photo, with POST method to '/user/update-photo' and multipart form data -->
+    <form id="updatePhotoForm" action="/user/update-photo" method="POST" enctype="multipart/form-data">
+      <!-- Profile Photo input field for file upload -->
+      <div class="mb-3">
+        <label for="photo" class="form-label login-info form-texto">Profile Photo</label>
+        <input type="file" class="form-control-sign form-control-sign2" id="photo" name="photo" accept="image/jpeg, image/png, image/gif">
+      </div>
+      <!-- Submit button to update profile photo -->
+      <div class="sign-btn">
+        <button type="submit" class="btn-dark btn-sign">Update Photo</button>
+      </div>
+    </form>
+  </div>
+</div>

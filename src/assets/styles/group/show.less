@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body .body-teampage {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#principal {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  flex: 1;
+  overflow: hidden;
+  height: 80%;
+}
+
+#mapa-container {
+  flex: 3;
+  background-color: #d9d9d9;
+  padding: 10px;
+  border-radius: 8px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+}
+
+#teammates-container {
+  flex: 1;
+  background-color: #d9d9d9;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+#teammates-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.teammate {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #7b7b7b;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.teammate img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.teammate .details {
+  flex: 1;
+}
+
+.teammate .details p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.teammate .details img {
+  height: 15px;
+  margin-left: 5px;
+}
+
+.teammate .details span {
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.leaflet-marker-icon{
+  border: 0.1rem solid #4D10A2;
+  border-radius: 50%;
+}
